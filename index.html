@@ -719,7 +719,7 @@
   <p class="hero-desc">The CHIP50 MCP server connects Claude AI directly to 20+ waves of national panel data on social media use, political attitudes, and mental health — no SQL, no scripting required.</p>
   <div class="hero-ctas">
     <a href="#queries" class="btn btn-white">See Sample Queries</a>
-    <a href="#setup" class="btn btn-outline">Setup Guide</a>
+    <a href="#setup" class="btn btn-outline">Connect in 4 Steps</a>
   </div>
   <div class="hero-stats">
     <div class="hero-stat">
@@ -1281,82 +1281,70 @@
 <section class="section section-alt" id="setup">
   <div class="container">
     <div class="section-label">Setup</div>
-    <h2>Get up and running in 15 minutes</h2>
-    <p class="section-intro">The server runs on Google Cloud Run and connects to a BigQuery dataset. You need a Google Cloud account and Claude Desktop (or any MCP-compatible client).</p>
-    <div class="setup-grid">
-      <div>
-        <div class="prereq-card">
-          <h3>Prerequisites</h3>
-          <ul class="prereq-list">
-            <li><span class="prereq-check">✓</span><div><strong>Google Cloud account</strong> with billing enabled — estimated $6–15/month</div></li>
-            <li><span class="prereq-check">✓</span><div><strong>gcloud CLI</strong> — <code>brew install google-cloud-sdk</code> on macOS</div></li>
-            <li><span class="prereq-check">✓</span><div><strong>Python 3.11+</strong> and <code>uv</code> package manager</div></li>
-            <li><span class="prereq-check">✓</span><div><strong>Claude Desktop</strong> (free) or any MCP-compatible client</div></li>
-            <li><span class="prereq-check">✓</span><div><strong>CHIP50 data files</strong> — loaded into BigQuery via <code>load_data.sh</code></div></li>
-          </ul>
-        </div>
-        <div style="margin-top:20px;padding:16px 20px;background:var(--blue-light);border:1px solid var(--border);border-radius:var(--radius-lg);">
-          <p style="font-size:13px;color:var(--navy);font-weight:600;margin-bottom:4px;">Full documentation</p>
-          <p style="font-size:13px;color:var(--text-muted);line-height:1.55;">
-            <a href="https://github.com/nanocentury-ai/DDFchip50/blob/main/remote-mcp/QUICKSTART.md" style="color:var(--blue);text-decoration:none;font-weight:500;">QUICKSTART.md</a> ·
-            <a href="https://github.com/nanocentury-ai/DDFchip50/blob/main/remote-mcp/SETUP.md" style="color:var(--blue);text-decoration:none;font-weight:500;">SETUP.md</a> ·
-            <a href="https://github.com/nanocentury-ai/DDFchip50/blob/main/remote-mcp/AGENTS.md" style="color:var(--blue);text-decoration:none;font-weight:500;">Architecture</a>
-          </p>
+    <h2>Connect to Claude in four steps</h2>
+    <p class="section-intro">No installation or accounts required. The CHIP50 server is already running — you just need to connect Claude to it.</p>
+
+    <div style="max-width:720px;">
+
+      <div class="setup-step-block">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Open Claude Settings</div>
+            <div class="step-desc">In Claude, go to <strong>Settings → Connectors → Add custom connector</strong></div>
+          </div>
         </div>
       </div>
-      <div>
-        <div class="setup-step-block">
-          <div class="step">
-            <div class="step-num">1</div>
-            <div class="step-body">
-              <div class="step-title">Clone and configure</div>
-              <div class="step-desc">Set your Google Cloud project ID</div>
-            </div>
+
+      <div class="setup-step-block">
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Enter the connector details</div>
+            <div class="step-desc">Fill in the name and server URL as shown below, then save.</div>
           </div>
-          <pre><code>git clone https://github.com/nanocentury-ai/DDFchip50
-cd DDFchip50/remote-mcp
-export GCP_PROJECT="your-project-id"</code></pre>
         </div>
-        <div class="setup-step-block">
-          <div class="step">
-            <div class="step-num">2</div>
-            <div class="step-body">
-              <div class="step-title">Authenticate and deploy</div>
-              <div class="step-desc">Loads the CHIP50 data into BigQuery, then builds and deploys to Cloud Run (~10 min)</div>
-            </div>
+        <div style="margin-top:12px;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);">
+          <div style="display:grid;grid-template-columns:140px 1fr;border-bottom:1px solid var(--border);">
+            <div style="padding:12px 16px;background:var(--off-white);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);border-right:1px solid var(--border);">Name</div>
+            <div style="padding:12px 16px;font-family:'SF Mono','Fira Code',monospace;font-size:13px;color:var(--navy);">CHIP50 MCP</div>
           </div>
-          <pre><code>gcloud auth login
-gcloud auth application-default login
-./load_data.sh      # load CHIP50 CSV → BigQuery
-./deploy.sh         # build + deploy to Cloud Run</code></pre>
-        </div>
-        <div class="setup-step-block">
-          <div class="step">
-            <div class="step-num">3</div>
-            <div class="step-body">
-              <div class="step-title">Configure Claude Desktop</div>
-              <div class="step-desc">Add to <code>~/Library/Application Support/Claude/claude_desktop_config.json</code></div>
-            </div>
+          <div style="display:grid;grid-template-columns:140px 1fr;">
+            <div style="padding:12px 16px;background:var(--off-white);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);border-right:1px solid var(--border);">Server URL</div>
+            <div style="padding:12px 16px;font-family:'SF Mono','Fira Code',monospace;font-size:12px;color:var(--navy);word-break:break-all;">https://social-media-demographics-mcp-dnbn5uv2jq-uc.a.run.app/mcp</div>
           </div>
-          <pre><code>{
-  "mcpServers": {
-    "chip50": {
-      "url": "https://YOUR-SERVICE.run.app/mcp"
-    }
-  }
-}</code></pre>
-        </div>
-        <div class="setup-step-block">
-          <div class="step">
-            <div class="step-num">4</div>
-            <div class="step-body">
-              <div class="step-title">Restart Claude and verify</div>
-              <div class="step-desc">Try this to confirm the connection is working</div>
-            </div>
-          </div>
-          <pre><code>What variables are available in the CHIP50 dataset?</code></pre>
         </div>
       </div>
+
+      <div class="setup-step-block">
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Authenticate with Google</div>
+            <div class="step-desc">Claude will redirect you to a Google sign-in page. Log in with your Google account. If you see an access request screen, click <strong>Request access</strong> — you will be notified once access is granted.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-step-block">
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Start your analysis</div>
+            <div class="step-desc">After authentication, Claude redirects you back automatically. The CHIP50 connector will appear as active. Try this to verify:</div>
+          </div>
+        </div>
+        <pre><code>What variables are available in the CHIP50 dataset?</code></pre>
+      </div>
+
+      <div style="margin-top:8px;padding:16px 20px;background:var(--blue-light);border:1px solid var(--border);border-radius:var(--radius-lg);display:flex;gap:12px;align-items:flex-start;">
+        <div style="font-size:18px;flex-shrink:0;padding-top:1px;">ℹ️</div>
+        <div>
+          <p style="font-size:13px;color:var(--navy);font-weight:600;margin-bottom:3px;">Access is managed</p>
+          <p style="font-size:13px;color:var(--text-muted);line-height:1.55;">The CHIP50 MCP server is a research resource. If your Google account isn't yet authorized, use the request access prompt at the authentication screen and you'll be notified when access is granted.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
