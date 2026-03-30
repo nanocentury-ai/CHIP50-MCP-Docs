@@ -1,6 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function() {
+  const HASH = 'e54ded1da53ef07852ac2264a0e60e41ec6a76ffd36415f82d3baf176d653bc3';
+  if (sessionStorage.getItem('chip50auth') === HASH) return;
+  document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.overflow = 'hidden';
+    var gate = document.createElement('div');
+    gate.id = 'gate';
+    gate.innerHTML = `
+      <div id="gate-box">
+        <img src="chip50.png" alt="CHIP50" style="height:52px;margin-bottom:20px;">
+        <div id="gate-title">CHIP50 MCP Documentation</div>
+        <div id="gate-sub">Enter the access password to continue</div>
+        <input id="gate-input" type="password" placeholder="Password" autocomplete="current-password">
+        <button id="gate-btn">Continue</button>
+        <div id="gate-error"></div>
+      </div>`;
+    document.body.prepend(gate);
+    function attempt() {
+      var val = document.getElementById('gate-input').value;
+      crypto.subtle.digest('SHA-256', new TextEncoder().encode(val)).then(function(buf) {
+        var hex = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+        if (hex === HASH) {
+          sessionStorage.setItem('chip50auth', HASH);
+          document.getElementById('gate').remove();
+          document.body.style.overflow = '';
+        } else {
+          var err = document.getElementById('gate-error');
+          err.textContent = 'Incorrect password.';
+          document.getElementById('gate-input').value = '';
+          document.getElementById('gate-input').focus();
+        }
+      });
+    }
+    document.getElementById('gate-btn').addEventListener('click', attempt);
+    document.getElementById('gate-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') attempt();
+    });
+    setTimeout(function() { document.getElementById('gate-input').focus(); }, 50);
+  });
+})();
+</script>
+<style>
+  #gate {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #f8f9fb;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #gate-box {
+    background: #fff;
+    border: 1px solid #dde3ed;
+    border-top: 3px solid #1c3461;
+    border-radius: 10px;
+    padding: 40px 44px 36px;
+    box-shadow: 0 4px 24px rgba(28,52,97,0.12);
+    text-align: center;
+    width: 100%;
+    max-width: 360px;
+  }
+  #gate-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800; font-size: 17px;
+    color: #1c3461; margin-bottom: 6px;
+  }
+  #gate-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px; color: #5a6680;
+    margin-bottom: 24px;
+  }
+  #gate-input {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid #dde3ed; border-radius: 6px;
+    font-family: 'Barlow', sans-serif; font-size: 15px;
+    color: #1a2340; outline: none;
+    margin-bottom: 12px;
+    transition: border-color 0.15s;
+  }
+  #gate-input:focus { border-color: #1c3461; }
+  #gate-btn {
+    width: 100%; padding: 10px;
+    background: #1c3461; color: #fff;
+    border: none; border-radius: 6px;
+    font-family: 'Barlow', sans-serif;
+    font-weight: 600; font-size: 14px;
+    cursor: pointer; transition: background 0.15s;
+  }
+  #gate-btn:hover { background: #264d8c; }
+  #gate-error {
+    margin-top: 10px; font-size: 13px;
+    color: #b91c1c; font-family: 'Barlow', sans-serif;
+    min-height: 18px;
+  }
+</style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CHIP50 MCP — Documentation</title>
