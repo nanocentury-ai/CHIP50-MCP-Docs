@@ -15,9 +15,9 @@ The MCP server itself lives in a separate private repo (`nanocentury-ai/DDFchip5
 
 ## What the MCP server does
 
-Provides AI-accessible tools for analyzing the CHIP50 panel survey — ~10K respondents/wave, 20+ waves, 232 variables covering 19 social media platforms, 9 demographic variables, PHQ-9 mental health items, and political attitudes. All queries return population-weighted estimates with cell suppression (n < 30).
+Provides AI-accessible tools for analyzing the CHIP50 panel survey — ~10K respondents/wave, 20+ waves, 232 variables covering 19 social media platforms, 9 demographic variables, PHQ-9 mental health items, and political attitudes. All queries return population-weighted estimates with cell suppression (n < 10).
 
-14 tools: `get_available_variables`, `generate_marginals`, `generate_marginals_batch`, `generate_crosstab`, `generate_crosstab_filtered`, `generate_crosstab_batch`, `get_platform_trends`, `get_freq_trends`, `get_ordinal_distribution`, `get_ordinal_crosstab`, `get_platform_posting_summary`, `run_ols_regression`, `run_logistic_regression`, `introduce_mcp`.
+18 tools: `introduce_mcp`, `get_available_variables`, `get_wave_metadata`, `generate_marginals`, `generate_marginals_by_wave`, `generate_marginals_batch`, `generate_crosstab`, `generate_crosstab_by_wave`, `generate_crosstab_filtered`, `generate_crosstab_batch`, `get_platform_trends`, `get_freq_trends`, `get_ordinal_distribution`, `get_ordinal_crosstab`, `get_categorical_crosstab`, `get_platform_posting_summary`, `run_ols_regression`, `run_logistic_regression`.
 
 ## Docs site design
 
@@ -38,11 +38,11 @@ git add -A && git commit -m "..." && git push
 
 ## What's on the page
 
-1. **Hero** — tagline, key stats (20+ waves, ~10K respondents, 19 platforms, 232 variables, 14 tools)
+1. **Hero** — tagline, key stats (20+ waves, ~10K respondents, 19 platforms, 232 variables, 18 tools)
 2. **Overview** — plain-English explanation of CHIP50 + how the MCP works (4-step flow)
 3. **Data** — coverage cards: platforms, demographics, mental health, political attitudes, waves, privacy
 4. **Sample Queries** — tabbed section with Quick / Medium / Complex query examples with prompts and expected outputs
-5. **Tools Reference** — all 14 MCP tools with plain-English descriptions
+5. **Tools Reference** — all 18 MCP tools with plain-English descriptions
 6. **Setup** — 4-step end-user connection guide (Settings → Connectors → Add custom connector)
 
 ## Key decisions / things to preserve
