@@ -15,9 +15,9 @@ The MCP server itself lives in a separate private repo (`nanocentury-ai/DDFchip5
 
 ## What the MCP server does
 
-Provides AI-accessible tools for analyzing the CHIP50 panel survey — ~10K respondents/wave, 20+ waves, 232 variables covering 19 social media platforms, 9 demographic variables, PHQ-9 mental health items, and political attitudes. All queries return population-weighted estimates with cell suppression (n < 10).
+Provides AI-accessible tools for analyzing the CHIP50 panel survey — ~10K respondents/wave, 38+ waves, 232 variables covering 20 social media platforms, 9 demographic variables, PHQ-9 mental health items, and political attitudes. All queries return population-weighted estimates with cell suppression (n < 10).
 
-18 tools: `introduce_mcp`, `get_available_variables`, `get_wave_metadata`, `generate_marginals`, `generate_marginals_by_wave`, `generate_marginals_batch`, `generate_crosstab`, `generate_crosstab_by_wave`, `generate_crosstab_filtered`, `generate_crosstab_batch`, `get_platform_trends`, `get_freq_trends`, `get_ordinal_distribution`, `get_ordinal_crosstab`, `get_categorical_crosstab`, `get_platform_posting_summary`, `run_ols_regression`, `run_logistic_regression`.
+24 tools: `introduce_mcp`, `get_available_variables`, `get_question_wording`, `get_wave_metadata`, `generate_marginals`, `generate_marginals_by_wave`, `generate_marginals_batch`, `generate_crosstab`, `generate_crosstab_by_wave`, `generate_crosstab_filtered`, `generate_crosstab_batch`, `generate_crosstab_multi`, `summarize_pattern_by_wave`, `get_platform_trends`, `get_freq_trends`, `get_ordinal_distribution`, `get_ordinal_distribution_by_demographic`, `get_ordinal_crosstab`, `get_categorical_crosstab`, `get_platform_posting_summary`, `run_ols_regression`, `run_logistic_regression`, `generate_pdf_report`, `get_report_status`.
 
 ## Docs site design
 
@@ -38,7 +38,7 @@ git add -A && git commit -m "..." && git push
 
 ## What's on the page
 
-1. **Hero** — tagline, key stats (20+ waves, ~10K respondents, 19 platforms, 232 variables, 18 tools)
+1. **Hero** — tagline, key stats (38+ waves, ~10K respondents, 20 platforms, 232 variables, 24 tools)
 2. **Overview** — plain-English explanation of CHIP50 + how the MCP works (4-step flow)
 3. **Data** — coverage cards: platforms, demographics, mental health, political attitudes, waves, privacy
 4. **Sample Queries** — tabbed section with Quick / Medium / Complex query examples with prompts and expected outputs
@@ -50,4 +50,4 @@ git add -A && git commit -m "..." && git push
 - The setup section is oriented toward **end users connecting to the existing server**, not self-hosting. Do not revert it to deployment instructions.
 - The server URL in the setup section is the live production URL — do not treat it as a placeholder.
 - Access to the server is managed (Google OAuth). Users who aren't authorized should request access at the auth screen.
-- A JS password gate is planned but not yet implemented — the password should be stored as a SHA-256 hash, not plaintext.
+- A JS password gate is implemented — the password is stored as a SHA-256 hash checked client-side, with the session stored in `sessionStorage`.

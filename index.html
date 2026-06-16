@@ -807,25 +807,24 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);padding:4px 14px;margin-bottom:14px;">Under Development</div>
   <div class="hero-eyebrow">Model Context Protocol · AI-Powered Research Interface</div>
   <h1>Ask research questions.<br>Get statistically rigorous answers.</h1>
-  <p class="hero-desc">The CHIP50 MCP server connects Claude AI directly to 20+ waves of national panel data on social media use, political attitudes, and mental health — no SQL, no scripting required.</p>
+  <p class="hero-desc">The CHIP50 MCP server connects Claude AI directly to 38+ waves of national panel data on social media use, political attitudes, and mental health — no SQL, no scripting required.</p>
   <div class="hero-ctas">
     <a href="#queries" class="btn btn-white">See Sample Queries</a>
     <a href="#setup" class="btn btn-outline">Connect in 4 Steps</a>
   </div>
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="hero-stat-value">20+</div>
+      <div class="hero-stat-value">38+</div>
       <div class="hero-stat-label">Survey Waves</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-value">20–30K</div>
+      <div class="hero-stat-value">~10K</div>
       <div class="hero-stat-label">Respondents / Wave</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-value">19</div>
+      <div class="hero-stat-value">20</div>
       <div class="hero-stat-label">Platforms Tracked</div>
     </div>
     <div class="hero-stat">
@@ -833,7 +832,7 @@
       <div class="hero-stat-label">Variables</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-value">14</div>
+      <div class="hero-stat-value">24</div>
       <div class="hero-stat-label">AI Tools</div>
     </div>
   </div>
@@ -847,9 +846,9 @@
         <div class="section-label">Overview</div>
         <h2>A research assistant that knows the data</h2>
         <div class="prose">
-          <p><strong>CHIP50 is a large-scale, nationally representative panel survey</strong> that has tracked how Americans use social media — and how that use connects to political attitudes and mental health — across more than 20 survey waves since 2020. Each wave includes 20,000–30,000 respondents, weighted to match the U.S. population.</p>
+          <p><strong>CHIP50 is a large-scale, nationally representative panel survey</strong> that has tracked how Americans use social media — and how that use connects to political attitudes and mental health — across 38+ waves since 2020. Each wave includes approximately 10,000 respondents, weighted to match the U.S. adult population.</p>
           <p>This project gives you a way to <strong>query that data through conversation</strong>. Instead of writing SQL or running statistical software, you describe what you want to know in plain English. Claude selects the appropriate analysis tools, runs population-weighted queries against the CHIP50 BigQuery database, and returns tables, trend analyses, regression output, and prose summaries.</p>
-          <p>The system uses the <strong>Model Context Protocol (MCP)</strong>, an open standard that lets AI assistants call external tools. The CHIP50 MCP server is deployed on Google Cloud Run and exposes 14 specialized analysis tools — from simple crosstabs to full OLS and logistic regression with survey weights.</p>
+          <p>The system uses the <strong>Model Context Protocol (MCP)</strong>, an open standard that lets AI assistants call external tools. The CHIP50 MCP server is deployed on Google Cloud Run and exposes 24 specialized analysis tools — from simple crosstabs to full OLS and logistic regression with survey weights, and publication-quality PDF report generation.</p>
         </div>
       </div>
       <div class="how-box">
@@ -866,7 +865,7 @@
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">Claude selects the right tools</div>
-            <div class="step-desc">Claude automatically chooses from 14 specialized tools — crosstabs, trend lines, regressions, platform summaries — based on your question.</div>
+            <div class="step-desc">Claude automatically chooses from 24 specialized tools — crosstabs, trend lines, regressions, platform summaries, PDF report generation — based on your question.</div>
           </div>
         </div>
         <div class="step-spacer"></div>
@@ -900,7 +899,7 @@
       <div class="cov-card">
         <div class="cov-card-head">
           <div class="cov-icon">📱</div>
-          <div class="cov-title">Platforms (19)</div>
+          <div class="cov-title">Platforms (20)</div>
         </div>
         <ul>
           <li>Facebook, Instagram, X/Twitter</li>
@@ -908,7 +907,7 @@
           <li>LinkedIn, Reddit, WhatsApp</li>
           <li>Pinterest, Messenger, Tumblr</li>
           <li>Truth Social, Gab, Parler</li>
-          <li>Mastodon, Bluesky, 4chan</li>
+          <li>Mastodon, Bluesky, Threads, 4chan</li>
           <li>Usage, frequency, trust, posting</li>
         </ul>
       </div>
@@ -962,8 +961,8 @@
           <div class="cov-title">Waves &amp; Coverage</div>
         </div>
         <ul>
-          <li>Waves 14–35+ (ongoing)</li>
-          <li>20,000–30,000 respondents per wave</li>
+          <li>Waves 14–38+ (ongoing)</li>
+          <li>~10,000 respondents per wave</li>
           <li>Survey weights provided</li>
           <li>Panel design (repeat measures)</li>
           <li>Wave-specific date ranges</li>
@@ -1296,6 +1295,56 @@
     <h2>What Claude can call</h2>
     <p class="section-intro">Claude automatically selects the appropriate tools for your question. All queries return population-weighted estimates with cell suppression for privacy.</p>
     <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-fn">get_question_wording</div>
+        <h4>Survey Question Wording</h4>
+        <p>Returns the exact survey text for any CHIP50 variable — the question stem, response labels, and scale. Call this to confirm what a variable measures before citing it in a report.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">get_wave_metadata</div>
+        <h4>Wave Metadata</h4>
+        <p>Per-wave respondent counts, field dates, and platform/question coverage flags. Essential for methodology sections and for checking which questions were fielded in a given wave.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">generate_marginals_by_wave</div>
+        <h4>Variable Distribution Across Waves</h4>
+        <p>Full response distribution of one variable across all waves, optionally stratified by a demographic group. The primary tool for tracking how any attitude or behavior has shifted over time.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">generate_crosstab_by_wave</div>
+        <h4>Platform × Demographic Across Waves</h4>
+        <p>Adoption rates for one platform broken down by a demographic group, tracked wave by wave. Use this to see whether a demographic gap is widening, narrowing, or stable over time.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">summarize_pattern_by_wave</div>
+        <h4>Trend Pattern Summary</h4>
+        <p>Structured summary of multi-wave trends: for each demographic group, the direction and magnitude of change; for each pair of groups, whether their gap is stable, widening, narrowing, or reversed.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">generate_crosstab_multi</div>
+        <h4>Multi-Dimensional Crosstab</h4>
+        <p>Variable broken down by the intersection of two or more demographic dimensions simultaneously — e.g. TikTok adoption by gender × party. Replaces running a regression just to get cell estimates.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">get_ordinal_distribution_by_demographic</div>
+        <h4>Full Ordinal Distribution by Group</h4>
+        <p>Complete response distribution (% at each scale point) for an ordinal variable, broken down by demographic group. Unlike the crosstab mean, this shows you the full profile — e.g. % Strongly support vs. % Strongly oppose.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">get_categorical_crosstab</div>
+        <h4>Categorical Variable Crosstab</h4>
+        <p>Weighted % distribution of a nominal categorical variable (e.g. primary news source, GLP-1 status) broken down by a demographic group. Handles non-ordinal, multi-category response items.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">generate_pdf_report</div>
+        <h4>PDF Report Generation</h4>
+        <p>Assembles a publication-quality PDF with a title page, abstract, numbered tables, Pew-style charts, auto-generated methodology section, and a reproducibility appendix listing every tool call used. Returns a signed download URL.</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-fn">get_report_status</div>
+        <h4>Report Job Status</h4>
+        <p>Polls the status of an async PDF report job and returns the download URL when it's ready. Use after calling generate_pdf_report for large reports that take a few seconds to build.</p>
+      </div>
       <div class="tool-card">
         <div class="tool-fn">get_available_variables</div>
         <h4>Variable Discovery</h4>
